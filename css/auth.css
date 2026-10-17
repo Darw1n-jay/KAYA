@@ -1,0 +1,179 @@
+.auth-page {
+    min-height: 100vh;
+
+    display: grid;
+    place-items: center;
+
+    padding: 30px;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(108, 99, 255, 0.16),
+            transparent 40%
+        );
+}
+
+.auth-card {
+    width: min(450px, 100%);
+
+    padding: 40px;
+
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+
+    border-radius: var(--radius-xl);
+
+    box-shadow: var(--shadow-md);
+}
+
+.auth-brand {
+    position: absolute;
+    top: 35px;
+    left: 35px;
+}
+
+.auth-brand p {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+}
+
+.auth-header {
+    margin-bottom: 30px;
+}
+
+.auth-label {
+    color: var(--color-primary);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+}
+
+.auth-header h1 {
+    font-size: 2rem;
+    margin: 8px 0;
+}
+
+.auth-header p {
+    color: var(--color-text-secondary);
+}
+
+/* Form Container */
+#loginForm,
+#registerForm {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Spacing between form items/groups */
+}
+
+/* Form Group Container for Label + Input pairing */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* Spacing between label and input */
+    width: 100%;
+}
+
+/* Label styling */
+.form-group label,
+#loginForm label,
+#registerForm label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+}
+
+/* Input field styling */
+.form-input,
+#loginForm input,
+#registerForm input {
+    width: 100%;
+    box-sizing: border-box; /* Ensures padding does not breach container width */
+    padding: 13px;
+
+    background: var(--color-background);
+    color: var(--color-text);
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+#loginForm input:focus,
+#registerForm input:focus,
+.form-input:focus {
+    border-color: var(--color-primary);
+}
+
+#loginForm button,
+#registerForm button {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.role-selection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.role-option {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+
+    padding: 15px;
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+
+    cursor: pointer;
+}
+
+.role-option:has(input:checked) {
+    border-color: var(--color-primary);
+    background: rgba(108, 99, 255, 0.08);
+}
+
+.role-option input {
+    accent-color: var(--color-primary);
+    margin-top: 4px;
+}
+
+.role-option small {
+    display: block;
+    color: var(--color-text-muted);
+    margin-top: 3px;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 25px;
+    color: var(--color-text-secondary);
+}
+
+.auth-footer a {
+    color: var(--color-primary-light);
+}
+
+@media (max-width: 600px) {
+
+    .auth-brand {
+        position: static;
+        margin-bottom: 20px;
+    }
+
+    .auth-page {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .auth-card {
+        padding: 25px;
+    }
+
+    .role-selection {
+        grid-template-columns: 1fr;
+    }
+}

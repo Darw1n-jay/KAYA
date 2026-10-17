@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Web Admin | KAYA</title>
+    <link rel="icon" type="image/png" href="../assets/images/KAYA app.png">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/admin.css">
+
+</head>
+
+<body>
+
+    <!-- ── Navbar ──────────────────────────────────── -->
+    <header class="navbar">
+
+        <div class="container navbar-inner">
+
+            <a href="../index.html" class="logo">
+                KA<span>YA</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="admin-web.html">Web Admin</a>
+                <a href="admin-approvals.html">Approvals Admin</a>
+            </nav>
+
+            <div class="nav-actions">
+                <span id="navbarUserName">Web Admin</span>
+                <button class="btn btn-secondary" onclick="logout()">Logout</button>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ── Two-column layout ───────────────────────── -->
+    <div class="admin-layout">
+
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+
+            <span class="admin-sidebar-label">Overview</span>
+            <a href="admin-web.html" class="admin-nav-link active">
+                <span class="nav-icon">🏠</span> Dashboard
+            </a>
+
+            <span class="admin-sidebar-label">Content</span>
+            <a href="#" class="admin-nav-link">
+                <span class="nav-icon">📄</span> Pages
+            </a>
+            <a href="#" class="admin-nav-link">
+                <span class="nav-icon">🖼️</span> Media
+            </a>
+            <a href="#" class="admin-nav-link">
+                <span class="nav-icon">📢</span> Announcements
+            </a>
+
+            <span class="admin-sidebar-label">System</span>
+            <a href="#" class="admin-nav-link">
+                <span class="nav-icon">⚙️</span> Site Settings
+            </a>
+            <a href="#" class="admin-nav-link">
+                <span class="nav-icon">📊</span> Analytics
+            </a>
+            <a href="#" class="admin-nav-link">
+                <span class="nav-icon">🔒</span> Security
+            </a>
+
+            <span class="admin-sidebar-label">Users</span>
+            <a href="#" class="admin-nav-link">
+                <span class="nav-icon">👥</span> All Users
+            </a>
+            <a href="#" class="admin-nav-link">
+                <span class="nav-icon">🛡️</span> Admin Roles
+            </a>
+
+        </aside>
+
+
+        <!-- Main content -->
+        <main class="admin-main">
+
+            <!-- Page header -->
+            <div class="admin-page-header">
+
+                <div class="admin-page-header-text">
+                    <div class="admin-role-badge">WEB ADMIN</div>
+                    <h1>Website Administration</h1>
+                    <p>Manage site content, settings, and platform health.</p>
+                </div>
+
+                <button class="btn btn-primary">+ Publish Announcement</button>
+
+            </div>
+
+
+            <!-- Stats -->
+            <div class="admin-stats-grid">
+
+                <div class="admin-stat-card">
+                    <span class="stat-label">Total Users</span>
+                    <strong class="stat-value">1,204</strong>
+                    <span class="stat-delta">+32 this week</span>
+                </div>
+
+                <div class="admin-stat-card">
+                    <span class="stat-label">Active Sessions</span>
+                    <strong class="stat-value">87</strong>
+                    <span class="stat-delta">Live now</span>
+                </div>
+
+                <div class="admin-stat-card">
+                    <span class="stat-label">Page Views</span>
+                    <strong class="stat-value">9,540</strong>
+                    <span class="stat-delta">+12% vs last week</span>
+                </div>
+
+                <div class="admin-stat-card">
+                    <span class="stat-label">Open Issues</span>
+                    <strong class="stat-value">4</strong>
+                    <span class="stat-delta negative">2 critical</span>
+                </div>
+
+            </div>
+
+
+            <!-- All Users Table -->
+            <div class="admin-section">
+
+                <div class="admin-section-header">
+                    <div>
+                        <h2>User Management</h2>
+                        <p>All registered platform users</p>
+                    </div>
+                    <button class="btn btn-secondary">Export CSV</button>
+                </div>
+
+                <div class="admin-filter-bar">
+                    <input type="text" class="admin-search-input" placeholder="Search by name or email…" />
+                    <select class="admin-filter-select">
+                        <option value="">All Roles</option>
+                        <option value="jobseeker">Job Seeker</option>
+                        <option value="client">Client</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                    <select class="admin-filter-select">
+                        <option value="">All Status</option>
+                        <option value="active">Active</option>
+                        <option value="suspended">Suspended</option>
+                        <option value="pending">Pending</option>
+                    </select>
+                </div>
+
+                <div class="admin-table-wrapper">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Joined</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="user-avatar">JD</div>
+                                        <div>
+                                            <div class="user-name">Juan Dela Cruz</div>
+                                            <div class="user-email">juan@example.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-admin">Job Seeker</span></td>
+                                <td><span class="badge badge-active">Active</span></td>
+                                <td>Oct 2, 2026</td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn-icon" title="View">👁</button>
+                                        <button class="btn-icon btn-reject" title="Suspend">🚫</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="user-avatar">MR</div>
+                                        <div>
+                                            <div class="user-name">Maria Reyes</div>
+                                            <div class="user-email">maria@example.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-admin">Client</span></td>
+                                <td><span class="badge badge-active">Active</span></td>
+                                <td>Sep 28, 2026</td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn-icon" title="View">👁</button>
+                                        <button class="btn-icon btn-reject" title="Suspend">🚫</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="user-avatar">CS</div>
+                                        <div>
+                                            <div class="user-name">Carlos Santos</div>
+                                            <div class="user-email">carlos@example.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge badge-admin">Job Seeker</span></td>
+                                <td><span class="badge badge-suspended">Suspended</span></td>
+                                <td>Aug 14, 2026</td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn-icon" title="View">👁</button>
+                                        <button class="btn-icon btn-approve" title="Reinstate">✔</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+
+            <!-- Activity Log -->
+            <div class="admin-section">
+
+                <div class="admin-section-header">
+                    <div>
+                        <h2>Recent Activity Log</h2>
+                        <p>Platform-wide system events</p>
+                    </div>
+                </div>
+
+                <div class="activity-list">
+
+                    <div class="activity-item">
+                        <div class="activity-dot dot-success"></div>
+                        <span class="activity-text">
+                            <strong>New user registered</strong> — Ana Gonzales (Job Seeker)
+                        </span>
+                        <span class="activity-time">2 mins ago</span>
+                    </div>
+
+                    <div class="activity-item">
+                        <div class="activity-dot dot-warning"></div>
+                        <span class="activity-text">
+                            <strong>Site settings updated</strong> — Maintenance banner enabled
+                        </span>
+                        <span class="activity-time">1 hr ago</span>
+                    </div>
+
+                    <div class="activity-item">
+                        <div class="activity-dot dot-danger"></div>
+                        <span class="activity-text">
+                            <strong>User suspended</strong> — Carlos Santos (Policy violation)
+                        </span>
+                        <span class="activity-time">3 hrs ago</span>
+                    </div>
+
+                    <div class="activity-item">
+                        <div class="activity-dot dot-success"></div>
+                        <span class="activity-text">
+                            <strong>Announcement published</strong> — Platform maintenance Oct 20
+                        </span>
+                        <span class="activity-time">Yesterday</span>
+                    </div>
+
+                    <div class="activity-item">
+                        <div class="activity-dot"></div>
+                        <span class="activity-text">
+                            <strong>Analytics export</strong> — Weekly report generated
+                        </span>
+                        <span class="activity-time">Yesterday</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- Scripts -->
+    <script type="module" src="../js/app.js"></script>
+    <script type="module">
+        import { logoutUser } from '../js/auth.js';
+        window.logout = async function () {
+            await logoutUser();
+        };
+    </script>
+
+</body>
+
+</html>

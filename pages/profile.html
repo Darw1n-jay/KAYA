@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | KAYA</title>
+    <link rel="icon" type="image/png" href="../assets/images/KAYA app.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/profile.css">
+</head>
+
+<body>
+
+    <!-- ── Navbar ──────────────────────────────────── -->
+    <header class="navbar">
+        <div class="container navbar-inner">
+            <a href="../index.html" class="logo">KA<span>YA</span></a>
+            <nav class="nav-links">
+                <a href="jobseeker-dashboard.html">Dashboard</a>
+                <a href="search.html">Find Work</a>
+                <a href="profile.html" aria-current="page">My Profile</a>
+            </nav>
+            <div class="nav-actions">
+                <span id="navbarUserName">Job Seeker</span>
+                <button type="button" class="btn btn-secondary btn-sm" id="logoutButton">Logout</button>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="profile-page">
+
+        <!-- ── Profile Banner ────────────────────── -->
+        <div class="profile-banner">
+            <div class="container">
+                <div class="profile-banner-info">
+
+                    <!-- Avatar upload widget -->
+                    <div style="display:flex;flex-direction:column;align-items:center;">
+                        <div class="avatar-upload-wrapper" id="avatarWrapper">
+                            <label class="avatar-preview" for="avatarFileInput" title="Click to change photo">
+                                <span id="profileInitials">JS</span>
+                            </label>
+                            <label class="avatar-upload-btn" for="avatarFileInput" title="Upload photo">📷</label>
+                            <input type="file" id="avatarFileInput" accept="image/png,image/jpeg,image/webp" aria-label="Upload profile photo">
+                        </div>
+                        <span class="avatar-upload-hint">Click to upload</span>
+                    </div>
+
+                    <div class="profile-banner-text">
+                        <div class="profile-role-badge" id="profileRoleBadge">JOB SEEKER</div>
+                        <h1 id="profileName">Your Name</h1>
+                        <p id="profileEmail">Loading…</p>
+                    </div>
+                </div>
+
+                <p id="profileSaveStatus" style="color:rgba(255,255,255,0.7);font-size:0.82rem;align-self:flex-end;padding-bottom:1.6rem;"></p>
+            </div>
+
+            <!-- Profile tabs -->
+            <div class="container">
+                <nav class="profile-tabs" role="tablist">
+                    <button class="profile-tab active" data-ptab="personal">Personal Info</button>
+                    <button class="profile-tab" data-ptab="professional">Professional</button>
+                    <button class="profile-tab" data-ptab="experience">Experience &amp; Education</button>
+                </nav>
+            </div>
+        </div>
+
+
+        <!-- ── Main content ──────────────────────── -->
+        <div class="container">
+            <div class="profile-layout">
+
+                <!-- Left: forms -->
+                <div>
+
+                    <!-- ── TAB: Personal Info ──────────────────── -->
+                    <div class="profile-tab-panel active" id="ptab-personal">
+
+                        <form id="profileForm">
+
+                            <!-- Basic Details -->
+                            <div class="profile-form-card">
+                                <h3 class="profile-section-title">
+                                    <span class="section-icon">👤</span> Basic Details
+                                </h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="fullNameInput">Full Name *</label>
+                                        <input type="text" id="fullNameInput" class="form-input"
+                                            placeholder="e.g. Juan Dela Cruz" maxlength="120" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nicknameInput">Nickname / Display Name</label>
+                                        <input type="text" id="nicknameInput" class="form-input"
+                                            placeholder="How you want to be called">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dobInput">Date of Birth *</label>
+                                        <input type="date" id="dobInput" class="form-input" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="genderInput">Gender *</label>
+                                        <select id="genderInput" class="form-input" required>
+                                            <option value="">Select gender</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="non-binary">Non-binary</option>
+                                            <option value="prefer-not-to-say">Prefer not to say</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="civilStatusInput">Civil Status</label>
+                                        <select id="civilStatusInput" class="form-input">
+                                            <option value="">Select status</option>
+                                            <option value="single">Single</option>
+                                            <option value="married">Married</option>
+                                            <option value="widowed">Widowed</option>
+                                            <option value="separated">Separated</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nationalityInput">Nationality</label>
+                                        <input type="text" id="nationalityInput" class="form-input"
+                                            placeholder="e.g. Filipino">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Contact Details -->
+                            <div class="profile-form-card">
+                                <h3 class="profile-section-title">
+                                    <span class="section-icon">📞</span> Contact Details
+                                </h3>
+
+                                <!-- Minglanilla-only notice -->
+                                <div class="minglanilla-notice">
+                                    <span class="notice-icon">📍</span>
+                                    <div>
+                                        <strong>KAYA is exclusively for Minglanilla, Cebu residents.</strong>
+                                        <span>Only residents of Minglanilla may register and use this platform.</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="phoneInput">Phone Number *</label>
+                                        <input type="tel" id="phoneInput" class="form-input"
+                                            placeholder="e.g. 09XXXXXXXXX" maxlength="30" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="altPhoneInput">Alternate Phone</label>
+                                        <input type="tel" id="altPhoneInput" class="form-input"
+                                            placeholder="e.g. 032-XXXXXXX">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="locationInput">Municipality</label>
+                                        <input type="text" id="locationInput" class="form-input"
+                                            value="Minglanilla, Cebu" readonly disabled
+                                            style="background:var(--color-surface-light);color:var(--color-text-muted);cursor:not-allowed;">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="barangayInput">Barangay *</label>
+                                        <select id="barangayInput" class="form-input" required>
+                                            <option value="">— Select your barangay —</option>
+                                            <option value="Cadulawan">Cadulawan</option>
+                                            <option value="Calajo-an">Calajo-an</option>
+                                            <option value="Camp 7">Camp 7</option>
+                                            <option value="Camp 8">Camp 8</option>
+                                            <option value="Cuanos">Cuanos</option>
+                                            <option value="Guindaruhan">Guindaruhan</option>
+                                            <option value="Linao">Linao</option>
+                                            <option value="Manduang">Manduang</option>
+                                            <option value="Pakigne">Pakigne</option>
+                                            <option value="Poblacion Ward I">Poblacion Ward I</option>
+                                            <option value="Poblacion Ward II">Poblacion Ward II</option>
+                                            <option value="Poblacion Ward III">Poblacion Ward III</option>
+                                            <option value="Poblacion Ward IV">Poblacion Ward IV</option>
+                                            <option value="Tubod">Tubod</option>
+                                            <option value="Tulay">Tulay</option>
+                                            <option value="Tunghaan">Tunghaan</option>
+                                            <option value="Tungkil">Tungkil</option>
+                                            <option value="Tungkop">Tungkop</option>
+                                            <option value="Vito">Vito</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group full">
+                                        <label for="addressInput">Street Address / House No. <span class="label-hint">(optional)</span></label>
+                                        <input type="text" id="addressInput" class="form-input"
+                                            placeholder="e.g. 123 Rizal St., Brgy. Poblacion Ward I">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ID Proof Upload -->
+                            <div class="profile-form-card">
+                                <h3 class="profile-section-title">
+                                    <span class="section-icon">🪪</span> Proof of Minglanilla Residency
+                                </h3>
+                                <p style="font-size:0.84rem;color:var(--color-text-secondary);margin-bottom:1.2rem;line-height:1.6;">
+                                    Upload a valid government-issued ID or document proving you are a resident of
+                                    <strong>Minglanilla, Cebu</strong>. Your account will remain <strong>pending</strong>
+                                    until an admin verifies your ID.
+                                </p>
+
+                                <div class="id-upload-area" id="idUploadArea">
+                                    <div class="id-upload-placeholder" id="idUploadPlaceholder">
+                                        <span class="id-upload-icon">🪪</span>
+                                        <strong>Click or drag to upload your ID</strong>
+                                        <span>Accepted: Barangay Certificate, PhilSys ID, Voter's ID, Postal ID, Driver's License<br>
+                                            showing Minglanilla address · Max 10 MB · JPG, PNG, PDF</span>
+                                        <label for="idProofInput" class="btn btn-ghost btn-sm" style="cursor:pointer;margin-top:0.5rem;">
+                                            Browse File
+                                        </label>
+                                    </div>
+                                    <div class="id-upload-preview" id="idUploadPreview" style="display:none;">
+                                        <img id="idPreviewImg" src="" alt="ID preview" style="display:none;">
+                                        <div class="id-file-info" id="idFileInfo"></div>
+                                        <button type="button" class="btn btn-ghost btn-sm" id="removeIdBtn">✕ Remove</button>
+                                    </div>
+                                    <input type="file" id="idProofInput" accept="image/png,image/jpeg,image/webp,application/pdf"
+                                        style="display:none;" aria-label="Upload ID proof">
+                                </div>
+
+                                <div id="idVerificationStatus" style="margin-top:1rem;display:none;">
+                                    <!-- Populated by JS based on current verification status -->
+                                </div>
+                            </div>
+
+                            <!-- Save button for personal tab -->
+                            <p id="profileMessage" class="profile-message" role="status" aria-live="polite"></p>
+                            <button type="submit" id="saveProfileButton" class="btn btn-primary btn-save-profile">
+                                Save Personal Info
+                            </button>
+
+                        </form>
+
+                    </div><!-- /#ptab-personal -->
+
+
+                    <!-- ── TAB: Professional ─────────────────────── -->
+                    <div class="profile-tab-panel" id="ptab-professional">
+
+                        <form id="professionalForm">
+
+                            <!-- About me -->
+                            <div class="profile-form-card">
+                                <h3 class="profile-section-title">
+                                    <span class="section-icon">📝</span> About Me
+                                </h3>
+                                <div class="form-group">
+                                    <label for="bioInput">Professional Summary *</label>
+                                    <textarea id="bioInput" class="form-input"
+                                        placeholder="Describe your experience, key skills, and what makes you stand out…"
+                                        rows="5" maxlength="1000" required></textarea>
+                                    <span class="field-hint"><span id="bioCharCount">0</span>/1000 characters</span>
+                                </div>
+                            </div>
+
+                            <!-- Skills -->
+                            <div class="profile-form-card">
+                                <h3 class="profile-section-title">
+                                    <span class="section-icon">🔧</span> Skills
+                                </h3>
+                                <div class="form-group">
+                                    <label for="primarySkillInput">Primary Skill / Job Title *</label>
+                                    <input type="text" id="primarySkillInput" class="form-input"
+                                        placeholder="e.g. Graphic Designer, Web Developer" required>
+                                </div>
+                                <div class="form-group" style="margin-top:1rem;">
+                                    <label>Additional Skills <span class="label-hint">press Enter or comma to add</span></label>
+                                    <div class="tags-input-wrapper" id="skillsTagWrapper">
+                                        <input type="text" class="tags-input-field" id="skillsTagInput"
+                                            placeholder="Type a skill and press Enter…">
+                                    </div>
+                                    <input type="hidden" id="skillsHidden">
+                                </div>
+                                <div class="form-group" style="margin-top:1rem;">
+                                    <label for="experienceLevelInput">Experience Level</label>
+                                    <select id="experienceLevelInput" class="form-input">
+                                        <option value="">Select level</option>
+                                        <option value="entry">Entry Level (0–2 years)</option>
+                                        <option value="mid">Mid Level (2–5 years)</option>
+                                        <option value="senior">Senior (5–10 years)</option>
+                                        <option value="expert">Expert (10+ years)</option>
+                                    </select>
+                                </div>
+                                <div class="form-grid" style="margin-top:1rem;">
+                                    <div class="form-group">
+                                        <label for="hourlyRateInput">Preferred Hourly Rate</label>
+                                        <input type="text" id="hourlyRateInput" class="form-input"
+                                            placeholder="e.g. ₱200/hr">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="availabilityInput">Availability</label>
+                                        <select id="availabilityInput" class="form-input">
+                                            <option value="">Select availability</option>
+                                            <option value="full-time">Full-time</option>
+                                            <option value="part-time">Part-time</option>
+                                            <option value="freelance">Freelance / Project-based</option>
+                                            <option value="not-available">Not currently available</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Portfolio links -->
+                            <div class="profile-form-card">
+                                <h3 class="profile-section-title">
+                                    <span class="section-icon">🔗</span> Portfolio &amp; Links
+                                </h3>
+                                <div id="portfolioLinks">
+                                    <!-- Populated by JS -->
+                                </div>
+                                <button type="button" class="btn-add-link" id="addLinkBtn">
+                                    + Add a link (portfolio, GitHub, LinkedIn, etc.)
+                                </button>
+                            </div>
+
+                            <p id="professionalMessage" class="profile-message" role="status" aria-live="polite"></p>
+                            <button type="submit" id="saveProfessionalButton" class="btn btn-primary btn-save-profile">
+                                Save Professional Info
+                            </button>
+
+                        </form>
+
+                    </div><!-- /#ptab-professional -->
+
+
+                    <!-- ── TAB: Experience & Education ───────────── -->
+                    <div class="profile-tab-panel" id="ptab-experience">
+
+                        <!-- Work experience -->
+                        <div class="profile-form-card">
+                            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;">
+                                <h3 class="profile-section-title" style="margin-bottom:0;border:none;padding-bottom:0;">
+                                    <span class="section-icon">💼</span> Work Experience
+                                </h3>
+                                <button type="button" class="btn btn-ghost btn-sm" id="addExpBtn">+ Add</button>
+                            </div>
+                            <div class="exp-list" id="expList">
+                                <!-- Populated by JS -->
+                            </div>
+
+                            <!-- Add experience form (hidden by default) -->
+                            <div id="addExpForm" style="display:none;border-top:1px solid var(--color-border);padding-top:1.25rem;margin-top:0.5rem;">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="expTitle">Job Title *</label>
+                                        <input type="text" id="expTitle" class="form-input" placeholder="e.g. Graphic Designer">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="expCompany">Company / Client *</label>
+                                        <input type="text" id="expCompany" class="form-input" placeholder="e.g. Acme Corp.">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="expFrom">From *</label>
+                                        <input type="month" id="expFrom" class="form-input">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="expTo">To</label>
+                                        <input type="month" id="expTo" class="form-input">
+                                        <span class="field-hint">Leave blank if currently working here.</span>
+                                    </div>
+                                    <div class="form-group full">
+                                        <label for="expDesc">Description</label>
+                                        <textarea id="expDesc" class="form-input" rows="3"
+                                            placeholder="Briefly describe your responsibilities…"></textarea>
+                                    </div>
+                                </div>
+                                <div style="display:flex;gap:0.6rem;margin-top:0.75rem;">
+                                    <button type="button" class="btn btn-primary btn-sm" id="saveExpBtn">Save</button>
+                                    <button type="button" class="btn btn-ghost btn-sm" id="cancelExpBtn">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Education -->
+                        <div class="profile-form-card">
+                            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;">
+                                <h3 class="profile-section-title" style="margin-bottom:0;border:none;padding-bottom:0;">
+                                    <span class="section-icon">🎓</span> Education
+                                </h3>
+                                <button type="button" class="btn btn-ghost btn-sm" id="addEduBtn">+ Add</button>
+                            </div>
+                            <div class="exp-list" id="eduList">
+                                <!-- Populated by JS -->
+                            </div>
+
+                            <!-- Add education form (hidden by default) -->
+                            <div id="addEduForm" style="display:none;border-top:1px solid var(--color-border);padding-top:1.25rem;margin-top:0.5rem;">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="eduDegree">Degree / Course *</label>
+                                        <input type="text" id="eduDegree" class="form-input" placeholder="e.g. BS Computer Science">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="eduSchool">School / University *</label>
+                                        <input type="text" id="eduSchool" class="form-input" placeholder="e.g. University of Cebu">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="eduFrom">From</label>
+                                        <input type="number" id="eduFrom" class="form-input" placeholder="e.g. 2018" min="1950" max="2030">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="eduTo">To (Year Graduated)</label>
+                                        <input type="number" id="eduTo" class="form-input" placeholder="e.g. 2022" min="1950" max="2030">
+                                    </div>
+                                </div>
+                                <div style="display:flex;gap:0.6rem;margin-top:0.75rem;">
+                                    <button type="button" class="btn btn-primary btn-sm" id="saveEduBtn">Save</button>
+                                    <button type="button" class="btn btn-ghost btn-sm" id="cancelEduBtn">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div><!-- /#ptab-experience -->
+
+                </div><!-- /left col -->
+
+
+                <!-- Right: sidebar tips & stats -->
+                <div>
+                    <div class="profile-sidebar-card">
+                        <div class="sidebar-card-header">📊 Profile Overview</div>
+                        <div class="sidebar-card-body">
+                            <div class="sidebar-stat-row">
+                                <span>Profile views</span>
+                                <strong>—</strong>
+                            </div>
+                            <div class="sidebar-stat-row">
+                                <span>Member since</span>
+                                <strong id="sidebarMemberSince">—</strong>
+                            </div>
+                            <div class="sidebar-stat-row">
+                                <span>Applications sent</span>
+                                <strong>0</strong>
+                            </div>
+                            <div class="sidebar-stat-row">
+                                <span>Profile strength</span>
+                                <strong id="sidebarStrength">—</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-sidebar-card">
+                        <div class="sidebar-card-header">💡 Profile Tips</div>
+                        <div class="sidebar-card-body">
+                            <div class="sidebar-tip">
+                                <span class="tip-icon">📸</span>
+                                <span>Profiles with a photo get 3× more views from clients.</span>
+                            </div>
+                            <div class="sidebar-tip">
+                                <span class="tip-icon">🔧</span>
+                                <span>Add at least 5 skills to appear in more search results.</span>
+                            </div>
+                            <div class="sidebar-tip">
+                                <span class="tip-icon">📝</span>
+                                <span>Write a clear professional summary — it's the first thing clients read.</span>
+                            </div>
+                            <div class="sidebar-tip">
+                                <span class="tip-icon">🔗</span>
+                                <span>Link your portfolio or GitHub to build trust with clients.</span>
+                            </div>
+                            <div class="sidebar-tip">
+                                <span class="tip-icon">💼</span>
+                                <span>Complete your work experience to show your track record.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /sidebar -->
+
+            </div><!-- /profile-layout -->
+        </div><!-- /container -->
+
+    </div><!-- /.profile-page -->
+
+
+    <script type="module" src="../js/app.js"></script>
+    <script type="module" src="../js/profile.js"></script>
+    <script type="module">
+        import { logoutUser } from '../js/auth.js';
+        document.getElementById('logoutButton').addEventListener('click', logoutUser);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Dashboard | KAYA</title>
+    <link rel="icon" type="image/png" href="../assets/images/KAYA app.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+
+<body>
+
+    <!-- ── Navbar ──────────────────────────────────── -->
+    <header class="navbar">
+        <div class="container navbar-inner">
+            <a href="../index.html" class="logo">KA<span>YA</span></a>
+            <nav class="nav-links">
+                <a href="client-dashboard.html">Dashboard</a>
+                <a href="search.html">Find Talent</a>
+                <a href="client-profile.html">My Profile</a>
+            </nav>
+            <div class="nav-actions">
+                <span id="navbarUserName">Client</span>
+                <button class="btn btn-secondary btn-sm" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="dashboard">
+
+        <!-- ── Banner + Tabs ─────────────────────── -->
+        <div class="dashboard-banner">
+            <div class="container">
+                <div class="dashboard-banner-text">
+                    <span class="auth-label">CLIENT</span>
+                    <h1>Welcome back, <span id="welcomeName">Client</span>.</h1>
+                    <p>Post jobs, review applicants, and hire the right talent.</p>
+                </div>
+                <button class="btn btn-primary btn-sm" id="postJobBtn" style="margin-bottom:1.3rem;">+ Post a New Job</button>
+                <a href="client-profile.html" class="btn btn-ghost btn-sm" style="margin-bottom:1.3rem;color:#fff;border-color:rgba(255,255,255,0.3);">Edit Profile</a>
+            <div class="container">
+                <nav class="dashboard-tabs" role="tablist">
+                    <button class="dash-tab active" role="tab" data-tab="overview">Overview</button>
+                    <button class="dash-tab" role="tab" data-tab="listings">My Job Posts</button>
+                    <button class="dash-tab" role="tab" data-tab="applicants">Applicants</button>
+                    <button class="dash-tab" role="tab" data-tab="search">Find Talent</button>
+                </nav>
+            </div>
+        </div>
+
+
+        <!-- ── TAB: Overview ────────────────────── -->
+        <div class="tab-panel active" id="tab-overview">
+            <div class="container">
+
+                <!-- Profile completeness alert (shown only when fields are missing) -->
+                <div class="dash-card" id="clientCompletenessCard" style="display:none;margin-bottom:1.5rem;border-color:rgba(212,167,44,0.4);"></div>
+
+                <!-- Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span>Active Posts</span>
+                        <strong id="statPosts">0</strong>
+                        <span class="stat-sub">Live listings</span>
+                    </div>
+                    <div class="stat-card">
+                        <span>Total Applicants</span>
+                        <strong id="statApplicants">0</strong>
+                        <span class="stat-sub">Across all posts</span>
+                    </div>
+                    <div class="stat-card">
+                        <span>Hired</span>
+                        <strong id="statHired">0</strong>
+                        <span class="stat-sub">All time</span>
+                    </div>
+                    <div class="stat-card">
+                        <span>New This Week</span>
+                        <strong id="statNew">0</strong>
+                        <span class="stat-sub">New applicants</span>
+                    </div>
+                </div>
+
+                <div class="dashboard-body">
+                    <!-- Left column -->
+                    <div>
+                        <!-- Active listings snapshot -->
+                        <div class="dash-card" style="margin-bottom:1.5rem;">
+                            <div class="dash-card-header">
+                                <h2>Active Job Posts</h2>
+                                <button class="link-sm" style="background:none;border:none;cursor:pointer;" onclick="switchTab('listings')">Manage all →</button>
+                            </div>
+                            <div class="listing-list" id="activeListingsList">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Applicant pipeline preview -->
+                        <div class="dash-card">
+                            <div class="dash-card-header">
+                                <h2>Applicant Pipeline</h2>
+                                <button class="link-sm" style="background:none;border:none;cursor:pointer;" onclick="switchTab('applicants')">View all →</button>
+                            </div>
+                            <div class="applicant-pipeline" id="pipelineView">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right column -->
+                    <div>
+                        <!-- Quick candidate search -->
+                        <div class="dash-card" style="margin-bottom:1.25rem;">
+                            <div class="dash-card-header">
+                                <h2>Find Talent</h2>
+                                <a href="search.html" class="link-sm">Advanced search →</a>
+                            </div>
+                            <div class="candidate-search-card">
+                                <p>Search thousands of skilled professionals on KAYA.</p>
+                                <form class="candidate-search-form" id="quickSearchForm">
+                                    <input type="text" class="dash-input" id="quickSkillInput" placeholder="Skill or job title…">
+                                    <button type="submit" class="btn btn-primary btn-sm">Search</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Recommended candidates -->
+                        <div class="dash-card">
+                            <div class="dash-card-header">
+                                <h2>Recommended Talent</h2>
+                                <a href="search.html" class="link-sm">See more →</a>
+                            </div>
+                            <div class="candidate-list" id="recommendedCandidates">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- ── TAB: My Job Posts ─────────────────── -->
+        <div class="tab-panel" id="tab-listings">
+            <div class="container">
+                <div class="dash-card">
+                    <div class="dash-card-header">
+                        <h2>My Job Posts</h2>
+                        <button class="btn btn-primary btn-sm" id="postJobBtn2">+ Post New Job</button>
+                    </div>
+                    <div style="display:flex;gap:0.5rem;padding:0.75rem 1.4rem;border-bottom:1px solid var(--color-border);">
+                        <select id="listingStatusFilter" class="dash-input" style="max-width:160px;padding:0.4rem 0.7rem;font-size:0.8rem;">
+                            <option value="all">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="closed">Closed</option>
+                        </select>
+                    </div>
+                    <div class="listing-list" id="fullListingsList">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ── TAB: Applicants ───────────────────── -->
+        <div class="tab-panel" id="tab-applicants">
+            <div class="container">
+                <div class="dash-card">
+                    <div class="dash-card-header">
+                        <h2>All Applicants</h2>
+                        <select id="applicantJobFilter" class="dash-input" style="max-width:220px;padding:0.4rem 0.7rem;font-size:0.8rem;">
+                            <option value="all">All Job Posts</option>
+                        </select>
+                    </div>
+                    <div id="fullApplicantsList">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ── TAB: Find Talent ──────────────────── -->
+        <div class="tab-panel" id="tab-search">
+            <div class="container">
+                <div class="dash-card">
+                    <div class="dash-card-header">
+                        <h2>Search Talent</h2>
+                    </div>
+                    <div style="padding:1.2rem 1.4rem;border-bottom:1px solid var(--color-border);">
+                        <form class="candidate-search-form" id="talentSearchForm" style="flex-wrap:wrap;">
+                            <input type="text" class="dash-input" id="talentSkillInput" placeholder="Skill, role, or keyword…" style="flex:2;min-width:200px;">
+                            <input type="text" class="dash-input" id="talentLocationInput" placeholder="Location…" style="flex:1;min-width:140px;">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </form>
+                    </div>
+                    <div class="candidate-list" id="talentSearchResults">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /.dashboard -->
+
+
+    <!-- ── Post Job Modal ──────────────────────────── -->
+    <div class="modal-overlay" id="postJobModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Post a New Job</h2>
+                <button class="modal-close" id="closePostJobModal">✕</button>
+            </div>
+            <form class="modal-form" id="postJobForm">
+                <div class="form-group">
+                    <label for="jobTitle">Job Title *</label>
+                    <input type="text" id="jobTitle" placeholder="e.g. Frontend Web Developer" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="jobCategory">Category *</label>
+                        <select id="jobCategory" required>
+                            <option value="">Select category</option>
+                            <option>Web Development</option>
+                            <option>Graphic Design</option>
+                            <option>Content Writing</option>
+                            <option>Digital Marketing</option>
+                            <option>Photography</option>
+                            <option>Music &amp; Audio</option>
+                            <option>Repair &amp; Maintenance</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="jobType">Job Type *</label>
+                        <select id="jobType" required>
+                            <option value="">Select type</option>
+                            <option>Full-time</option>
+                            <option>Part-time</option>
+                            <option>Freelance / Project</option>
+                            <option>Internship</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="jobLocation">Location</label>
+                        <input type="text" id="jobLocation" placeholder="e.g. Cebu City / Remote">
+                    </div>
+                    <div class="form-group">
+                        <label for="jobBudget">Budget / Salary</label>
+                        <input type="text" id="jobBudget" placeholder="e.g. ₱15,000 – ₱25,000">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="jobDesc">Job Description *</label>
+                    <textarea id="jobDesc" placeholder="Describe the role, responsibilities, and requirements…" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="jobSkills">Required Skills</label>
+                    <input type="text" id="jobSkills" placeholder="e.g. HTML, CSS, JavaScript (comma-separated)">
+                </div>
+                <div style="display:flex;gap:0.75rem;justify-content:flex-end;margin-top:0.5rem;">
+                    <button type="button" class="btn btn-ghost btn-sm" id="cancelPostJob">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Post Job</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Scripts -->
+    <script type="module" src="../js/app.js"></script>
+    <script type="module" src="../js/client-dashboard.js"></script>
+    <script type="module">
+        import { logoutUser } from '../js/auth.js';
+        window.logout = async function () { await logoutUser(); };
+    </script>
+
+</body>
+</html>

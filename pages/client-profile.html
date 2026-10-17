@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Profile | KAYA</title>
+    <link rel="icon" type="image/png" href="../assets/images/KAYA app.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/profile.css">
+</head>
+
+<body>
+
+    <!-- ── Navbar ──────────────────────────────────── -->
+    <header class="navbar">
+        <div class="container navbar-inner">
+            <a href="../index.html" class="logo">KA<span>YA</span></a>
+            <nav class="nav-links">
+                <a href="client-dashboard.html">Dashboard</a>
+                <a href="search.html">Find Talent</a>
+                <a href="client-profile.html" aria-current="page">My Profile</a>
+            </nav>
+            <div class="nav-actions">
+                <span id="navbarUserName">Client</span>
+                <button type="button" class="btn btn-secondary btn-sm" id="logoutButton">Logout</button>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="profile-page">
+
+        <!-- ── Profile Banner ────────────────────── -->
+        <div class="profile-banner">
+            <div class="container">
+                <div class="profile-banner-info">
+
+                    <!-- Company logo / avatar upload -->
+                    <div style="display:flex;flex-direction:column;align-items:center;">
+                        <div class="avatar-upload-wrapper" id="avatarWrapper">
+                            <label class="avatar-preview" for="avatarFileInput" title="Click to change logo">
+                                <span id="profileInitials">CO</span>
+                            </label>
+                            <label class="avatar-upload-btn" for="avatarFileInput" title="Upload logo">📷</label>
+                            <input type="file" id="avatarFileInput" accept="image/png,image/jpeg,image/webp" aria-label="Upload company logo">
+                        </div>
+                        <span class="avatar-upload-hint">Upload logo</span>
+                    </div>
+
+                    <div class="profile-banner-text">
+                        <div class="profile-role-badge" id="profileRoleBadge">CLIENT</div>
+                        <h1 id="profileName">Your Company</h1>
+                        <p id="profileEmail">Loading…</p>
+                    </div>
+                </div>
+
+                <p id="profileSaveStatus" style="color:rgba(255,255,255,0.7);font-size:0.82rem;align-self:flex-end;padding-bottom:1.6rem;"></p>
+            </div>
+
+            <!-- Profile tabs -->
+            <div class="container">
+                <nav class="profile-tabs" role="tablist">
+                    <button class="profile-tab active" data-ptab="company">Company Info</button>
+                    <button class="profile-tab" data-ptab="contact">Contact Person</button>
+                    <button class="profile-tab" data-ptab="account">Account Settings</button>
+                </nav>
+            </div>
+        </div>
+
+
+        <!-- ── Main content ──────────────────────── -->
+        <div class="container">
+            <div class="profile-layout">
+
+                <!-- Left: forms -->
+                <div>
+
+                    <!-- ── TAB: Company Info ──────────────────── -->
+                    <div class="profile-tab-panel active" id="ptab-company">
+
+                        <form id="clientProfileForm">
+
+                            <!-- Company Details -->
+                            <div class="profile-form-card">
+                                <h3 class="profile-section-title">
+                                    <span class="section-icon">🏢</span> Company Details
+                                </h3>
+                                <div class="form-grid">
+                                    <div class="form-group full">
+                                        <label for="companyNameInput">Company / Business Name *</label>
+                                        <input type="text" id="companyNameInput" class="form-input"
+                                            placeholder="e.g. TechGrow Inc." required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="industryInput">Industry *</label>
+                                        <select id="industryInput" class="form-input" required>
+                                            <option value="">Select industry</option>
+                                            <option>Technology</option>
+                                            <option>Retail &amp; E-commerce</option>
+                                            <option>Food &amp; Beverage</option>
+                                            <option>Healthcare</option>
+                                            <option>Education</option>
+                                            <option>Construction &amp; Real Estate</option>
+                                            <option>Finance &amp; Insurance</option>
+                                            <option>Media &amp; Entertainment</option>
+                                            <option>Manufacturing</option>
+                                            <option>Non-profit</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="companySizeInput">Company Size</label>
+                                        <select id="companySizeInput" class="form-input">
+                                            <option value="">Select size</option>
+                                            <option value="1-10">1–10 employees (Micro)</option>
+                                            <option value="11-50">11–50 employees (Small)</option>
+                                            <option value="51-200">51–200 employees (Medium)</option>
+                                            <option value="201-1000">201–1,000 employees (Large)</option>
+                                            <option value="1000+">1,000+ employees (Enterprise)</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="foundedInput">Year Founded</label>
+                                        <input type="number" id="foundedInput" class="form-input"
+                                            placeholder="e.g. 2015" min="1900" max="2030">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="websiteInput">Company Website</label>
+                                        <input type="url" id="websiteInput" class="form-input"
+                                            placeholder="https://yourcompany.com">
+                                    </div>
+                                    <div class="form-group full">
+                                        <label for="companyDescInput">Company Description *</label>
+                                        <textarea id="companyDescInput" class="form-input" rows="5"
+                                            placeholder="Describe what your company does, your mission, and what kind of talent you're looking for…"
+                                            maxlength="1500" required></textarea>
+                                        <span class="field-hint"><span id="descCharCount">0</span>/1500 characters</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Address -->
+                            <div class="profile-form-card">
+                                <h3 class="profile-section-title">
+                                    <span class="section-icon">📍</span> Office Location
+                                </h3>
+
+                                <!-- Minglanilla-only notice -->
+                                <div class="minglanilla-notice">
+                                    <span class="notice-icon">📍</span>
+                                    <div>
+                                        <strong>KAYA is exclusively for Minglanilla, Cebu businesses.</strong>
+                                        <span>Only businesses operating in Minglanilla may register as clients.</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-grid">
+                                    <div class="form-group full">
+                                        <label for="officeAddressInput">Street Address / Building</label>
+                                        <input type="text" id="officeAddressInput" class="form-input"
+                                            placeholder="e.g. Unit 2, Rizal Bldg., Poblacion Ward I">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="officeBarangayInput">Barangay *</label>
+                                        <select id="officeBarangayInput" class="form-input" required>
+                                            <option value="">— Select barangay —</option>
+                                            <option value="Cadulawan">Cadulawan</option>
+                                            <option value="Calajo-an">Calajo-an</option>
+                                            <option value="Camp 7">Camp 7</option>
+                                            <option value="Camp 8">Camp 8</option>
+                                            <option value="Cuanos">Cuanos</option>
+                                            <option value="Guindaruhan">Guindaruhan</option>
+                                            <option value="Linao">Linao</option>
+                                            <option value="Manduang">Manduang</option>
+                                            <option value="Pakigne">Pakigne</option>
+                                            <option value="Poblacion Ward I">Poblacion Ward I</option>
+                                            <option value="Poblacion Ward II">Poblacion Ward II</option>
+                                            <option value="Poblacion Ward III">Poblacion Ward III</option>
+                                            <option value="Poblacion Ward IV">Poblacion Ward IV</option>
+                                            <option value="Tubod">Tubod</option>
+                                            <option value="Tulay">Tulay</option>
+                                            <option value="Tunghaan">Tunghaan</option>
+                                            <option value="Tungkil">Tungkil</option>
+                                            <option value="Tungkop">Tungkop</option>
+                                            <option value="Vito">Vito</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="officeCityInput">Municipality</label>
+                                        <input type="text" id="officeCityInput" class="form-input"
+                                            value="Minglanilla" readonly disabled
+                                            style="background:var(--color-surface-light);color:var(--color-text-muted);cursor:not-allowed;">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="officeProvinceInput">Province</label>
+                                        <input type="text" id="officeProvinceInput" class="form-input"
+                                            value="Cebu" readonly disabled
+                                            style="background:var(--color-surface-light);color:var(--color-text-muted);cursor:not-allowed;">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="workSetupInput">Work Setup Offered</label>
+                                        <select id="workSetupInput" class="form-input">
+                                            <option value="">Select setup</option>
+                                            <option value="onsite">On-site</option>
+                                            <option value="remote">Remote</option>
+                                            <option value="hybrid">Hybrid</option>
+                                            <option value="flexible">Flexible</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ID / Business Proof Upload -->
+                            <div class="profile-form-card">
+                                <h3 class="profile-section-title">
+                                    <span class="section-icon">🪪</span> Proof of Minglanilla Business Location
+                                </h3>
+                                <p style="font-size:0.84rem;color:var(--color-text-secondary);margin-bottom:1.2rem;line-height:1.6;">
+                                    Upload a valid document proving your business operates in
+                                    <strong>Minglanilla, Cebu</strong> — e.g. Business Permit, DTI/SEC Certificate,
+                                    or Mayor's Permit showing a Minglanilla address. Your account will remain
+                                    <strong>pending</strong> until an admin verifies your documents.
+                                </p>
+
+                                <div class="id-upload-area" id="idUploadArea">
+                                    <div class="id-upload-placeholder" id="idUploadPlaceholder">
+                                        <span class="id-upload-icon">📄</span>
+                                        <strong>Click or drag to upload your business document</strong>
+                                        <span>Accepted: Business Permit, DTI/SEC Certificate, Mayor's Permit<br>
+                                            showing Minglanilla address · Max 10 MB · JPG, PNG, PDF</span>
+                                        <label for="idProofInput" class="btn btn-ghost btn-sm" style="cursor:pointer;margin-top:0.5rem;">
+                                            Browse File
+                                        </label>
+                                    </div>
+                                    <div class="id-upload-preview" id="idUploadPreview" style="display:none;">
+                                        <img id="idPreviewImg" src="" alt="Document preview" style="display:none;">
+                                        <div class="id-file-info" id="idFileInfo"></div>
+                                        <button type="button" class="btn btn-ghost btn-sm" id="removeIdBtn">✕ Remove</button>
+                                    </div>
+                                    <input type="file" id="idProofInput" accept="image/png,image/jpeg,image/webp,application/pdf"
+                                        style="display:none;" aria-label="Upload business document">
+                                </div>
+
+                                <div id="idVerificationStatus" style="margin-top:1rem;display:none;"></div>
+                            </div>
+
+                            <p id="clientProfileMessage" class="profile-message" role="status" aria-live="polite"></p>
+                            <button type="submit" id="saveClientProfileButton" class="btn btn-primary btn-save-profile">
+                                Save Company Info
+                            </button>
+
+                        </form>
+
+                    </div><!-- /#ptab-company -->
+
+
+                    <!-- ── TAB: Contact Person ───────────────────── -->
+                    <div class="profile-tab-panel" id="ptab-contact">
+
+                        <form id="contactForm">
+
+                            <div class="profile-form-card">
+                                <h3 class="profile-section-title">
+                                    <span class="section-icon">👤</span> Contact Person Details
+                                </h3>
+                                <p style="font-size:0.82rem;color:var(--color-text-muted);margin-bottom:1.2rem;">
+                                    This information is used internally for account management.
+                                    It is <strong>not</strong> publicly displayed.
+                                </p>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="contactFirstNameInput">First Name *</label>
+                                        <input type="text" id="contactFirstNameInput" class="form-input"
+                                            placeholder="e.g. Maria" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contactLastNameInput">Last Name *</label>
+                                        <input type="text" id="contactLastNameInput" class="form-input"
+                                            placeholder="e.g. Santos" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contactPositionInput">Position / Title *</label>
+                                        <input type="text" id="contactPositionInput" class="form-input"
+                                            placeholder="e.g. HR Manager, CEO" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contactPhoneInput">Contact Phone *</label>
+                                        <input type="tel" id="contactPhoneInput" class="form-input"
+                                            placeholder="e.g. 09XXXXXXXXX" required>
+                                    </div>
+                                    <div class="form-group full">
+                                        <label for="contactEmailInput">Contact Email *</label>
+                                        <input type="email" id="contactEmailInput" class="form-input"
+                                            placeholder="hiring@yourcompany.com" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contactGenderInput">Gender</label>
+                                        <select id="contactGenderInput" class="form-input">
+                                            <option value="">Select gender</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="non-binary">Non-binary</option>
+                                            <option value="prefer-not-to-say">Prefer not to say</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contactDobInput">Date of Birth</label>
+                                        <input type="date" id="contactDobInput" class="form-input">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p id="contactMessage" class="profile-message" role="status" aria-live="polite"></p>
+                            <button type="submit" id="saveContactButton" class="btn btn-primary btn-save-profile">
+                                Save Contact Info
+                            </button>
+
+                        </form>
+
+                    </div><!-- /#ptab-contact -->
+
+
+                    <!-- ── TAB: Account Settings ─────────────────── -->
+                    <div class="profile-tab-panel" id="ptab-account">
+
+                        <div class="profile-form-card">
+                            <h3 class="profile-section-title">
+                                <span class="section-icon">⚙️</span> Account Settings
+                            </h3>
+                            <div class="form-grid">
+                                <div class="form-group full">
+                                    <label>Registered Email</label>
+                                    <input type="email" id="accountEmailDisplay" class="form-input" disabled>
+                                </div>
+                                <div class="form-group full">
+                                    <label for="newPasswordInput">New Password</label>
+                                    <input type="password" id="newPasswordInput" class="form-input"
+                                        placeholder="Leave blank to keep current password" minlength="8">
+                                </div>
+                                <div class="form-group full">
+                                    <label for="confirmNewPasswordInput">Confirm New Password</label>
+                                    <input type="password" id="confirmNewPasswordInput" class="form-input"
+                                        placeholder="Re-enter new password" minlength="8">
+                                </div>
+                            </div>
+                            <p id="accountMessage" class="profile-message" role="status" aria-live="polite" style="margin-top:1rem;"></p>
+                            <button type="button" id="savePasswordBtn" class="btn btn-primary" style="margin-top:0.75rem;">
+                                Update Password
+                            </button>
+                        </div>
+
+                        <div class="profile-form-card" style="border-color:rgba(220,38,38,0.25);">
+                            <h3 class="profile-section-title" style="color:var(--color-danger);">
+                                <span class="section-icon">⚠️</span> Danger Zone
+                            </h3>
+                            <p style="font-size:0.85rem;color:var(--color-text-secondary);margin-bottom:1rem;">
+                                Deleting your account will permanently remove all your data from KAYA.
+                                This action cannot be undone.
+                            </p>
+                            <button type="button" class="btn"
+                                style="background:rgba(220,38,38,0.08);color:var(--color-danger);border:1px solid rgba(220,38,38,0.3);"
+                                id="deleteAccountBtn">
+                                Delete My Account
+                            </button>
+                        </div>
+
+                    </div><!-- /#ptab-account -->
+
+                </div><!-- /left col -->
+
+
+                <!-- Right: sidebar -->
+                <div>
+                    <div class="profile-sidebar-card">
+                        <div class="sidebar-card-header">📊 Account Overview</div>
+                        <div class="sidebar-card-body">
+                            <div class="sidebar-stat-row">
+                                <span>Member since</span>
+                                <strong id="sidebarMemberSince">—</strong>
+                            </div>
+                            <div class="sidebar-stat-row">
+                                <span>Active job posts</span>
+                                <strong>—</strong>
+                            </div>
+                            <div class="sidebar-stat-row">
+                                <span>Total applicants</span>
+                                <strong>—</strong>
+                            </div>
+                            <div class="sidebar-stat-row">
+                                <span>Account status</span>
+                                <strong style="color:var(--color-success)">Active</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-sidebar-card">
+                        <div class="sidebar-card-header">💡 Tips for Clients</div>
+                        <div class="sidebar-card-body">
+                            <div class="sidebar-tip">
+                                <span class="tip-icon">🏢</span>
+                                <span>Add your company logo to look more professional and attract top talent.</span>
+                            </div>
+                            <div class="sidebar-tip">
+                                <span class="tip-icon">📝</span>
+                                <span>Write a compelling company description — job seekers check it before applying.</span>
+                            </div>
+                            <div class="sidebar-tip">
+                                <span class="tip-icon">🌐</span>
+                                <span>Link your website to build credibility with applicants.</span>
+                            </div>
+                            <div class="sidebar-tip">
+                                <span class="tip-icon">📍</span>
+                                <span>Specify your work setup (remote, hybrid) to attract the right candidates.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /sidebar -->
+
+            </div>
+        </div>
+
+    </div><!-- /.profile-page -->
+
+
+    <script type="module" src="../js/app.js"></script>
+    <script type="module" src="../js/client-profile.js"></script>
+    <script type="module">
+        import { logoutUser } from '../js/auth.js';
+        document.getElementById('logoutButton').addEventListener('click', logoutUser);
+    </script>
+
+</body>
+</html>

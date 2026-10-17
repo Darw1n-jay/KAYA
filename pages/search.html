@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Find Workers | KAYA</title>
+    <link rel="icon" type="image/png" href="assets/images/KAYA app.png">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/search.css">
+
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="container navbar-inner">
+
+            <a href="../index.html" class="logo">
+                KA<span>YA</span>
+            </a>
+
+
+            <nav class="nav-links">
+                <a href="jobseeker-dashboard.html">
+                    Dashboard
+                </a>
+                <a href="search.html">
+                    Find Work
+                </a>
+                <a href="profile.html" aria-current="page">
+                    My Profile
+                </a>
+            </nav>
+
+            </nav>
+
+            <div class="nav-actions" id="navbarAuth">
+                <a href="login.html" class="btn btn-secondary">
+                    Login
+                </a>
+
+                <a href="register.html" class="btn btn-primary">
+                    Join KAYA
+                </a>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main class="search-page">
+
+        <div class="container">
+
+            <div class="search-header">
+
+                <span class="auth-label">
+                    DISCOVER
+                </span>
+
+                <h1>
+                    Find skilled people.
+                </h1>
+
+                <p>
+                    Search by skill, category or location.
+                </p>
+
+            </div>
+
+
+            <div class="search-layout">
+
+                <!-- FILTER -->
+
+                <aside class="filters card">
+
+                    <h3>
+                        Filters
+                    </h3>
+
+
+                    <label>
+                        Search
+                    </label>
+
+                    <input type="text" id="searchInput" placeholder="Search skills...">
+
+
+                    <label>
+                        Category
+                    </label>
+
+                    <select id="categoryFilter">
+
+                        <option value="all">
+                            All Categories
+                        </option>
+
+                        <option value="design">
+                            Graphic Design
+                        </option>
+
+                        <option value="development">
+                            Web Development
+                        </option>
+
+                        <option value="music">
+                            Music
+                        </option>
+
+                        <option value="repair">
+                            Repair
+                        </option>
+
+                        <option value="photography">
+                            Photography
+                        </option>
+
+                    </select>
+
+
+                    <label>
+                        Location
+                    </label>
+
+                    <input type="text" id="locationFilter" placeholder="e.g. Cebu">
+
+
+                    <label>
+                        Minimum Rating
+                    </label>
+
+                    <select id="ratingFilter">
+
+                        <option value="0">
+                            Any Rating
+                        </option>
+
+                        <option value="4">
+                            4.0+
+                        </option>
+
+                        <option value="4.5">
+                            4.5+
+                        </option>
+
+                        <option value="4.8">
+                            4.8+
+                        </option>
+
+                    </select>
+
+                </aside>
+
+
+                <!-- RESULTS -->
+
+                <section>
+
+                    <div id="searchResults" class="results-grid">
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <script src="../js/search.js"></script>
+    <script type="module" src="../js/app.js"></script>
+</body>
+
+</html>

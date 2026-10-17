@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approvals Admin | KAYA</title>
+    <link rel="icon" type="image/png" href="../assets/images/KAYA app.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+
+<body>
+
+    <!-- ── Navbar ──────────────────────────────────── -->
+    <header class="navbar">
+        <div class="container navbar-inner">
+            <a href="../index.html" class="logo">KA<span>YA</span></a>
+            <nav class="nav-links">
+                <a href="admin-web.html">Web Admin</a>
+                <a href="admin-approvals.html">Approvals Admin</a>
+            </nav>
+            <div class="nav-actions">
+                <span id="navbarUserName">Approvals Admin</span>
+                <button class="btn btn-secondary" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="admin-layout">
+
+        <!-- ── Sidebar ─────────────────────────────── -->
+        <aside class="admin-sidebar">
+            <span class="admin-sidebar-label">Overview</span>
+            <a href="admin-approvals.html" class="admin-nav-link active" id="sidebarDashboard">
+                <span class="nav-icon">🏠</span> Dashboard
+            </a>
+
+            <span class="admin-sidebar-label">Approvals</span>
+            <a href="#" class="admin-nav-link" id="sidebarSeekers" onclick="showSection('seekers');return false;">
+                <span class="nav-icon">👷</span> Job Seekers
+                <span class="admin-queue-count" id="seekerCount">0</span>
+            </a>
+            <a href="#" class="admin-nav-link" id="sidebarClients" onclick="showSection('clients');return false;">
+                <span class="nav-icon">🏢</span> Clients
+                <span class="admin-queue-count" id="clientCount">0</span>
+            </a>
+            <a href="#" class="admin-nav-link" id="sidebarJobListings" onclick="showSection('listings');return false;">
+                <span class="nav-icon">💼</span> Job Listings
+            </a>
+
+            <span class="admin-sidebar-label">Reviews</span>
+            <a href="#" class="admin-nav-link" id="sidebarIdVerif" onclick="showSection('idverif');return false;">
+                <span class="nav-icon">🪪</span> ID Verification
+                <span class="admin-queue-count" id="idVerifCount">0</span>
+            </a>
+            <a href="#" class="admin-nav-link">
+                <span class="nav-icon">🚩</span> Flagged Content
+            </a>
+
+            <span class="admin-sidebar-label">History</span>
+            <a href="#" class="admin-nav-link" id="sidebarLog" onclick="showSection('log');return false;">
+                <span class="nav-icon">📋</span> Approval Log
+            </a>
+        </aside>
+
+
+        <!-- ── Main content ──────────────────────── -->
+        <main class="admin-main">
+
+            <!-- Page header -->
+            <div class="admin-page-header">
+                <div class="admin-page-header-text">
+                    <div class="admin-role-badge">APPROVALS ADMIN</div>
+                    <h1>Approvals &amp; Verification</h1>
+                    <p>Review Minglanilla residency IDs and approve or reject account registrations.</p>
+                </div>
+                <button class="btn btn-primary" onclick="exportLog()">Export Log</button>
+            </div>
+
+            <!-- Stats -->
+            <div class="admin-stats-grid">
+                <div class="admin-stat-card">
+                    <span class="stat-label">Pending Seekers</span>
+                    <strong class="stat-value" id="statPendingSeekers">0</strong>
+                    <span class="stat-delta">Awaiting ID review</span>
+                </div>
+                <div class="admin-stat-card">
+                    <span class="stat-label">Pending Clients</span>
+                    <strong class="stat-value" id="statPendingClients">0</strong>
+                    <span class="stat-delta">Awaiting ID review</span>
+                </div>
+                <div class="admin-stat-card">
+                    <span class="stat-label">Approved Today</span>
+                    <strong class="stat-value" id="statApprovedToday">0</strong>
+                    <span class="stat-delta" id="statApprovedDelta">—</span>
+                </div>
+                <div class="admin-stat-card">
+                    <span class="stat-label">Rejected Today</span>
+                    <strong class="stat-value" id="statRejectedToday">0</strong>
+                    <span class="stat-delta negative" id="statRejectedDelta">—</span>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════
+                 SECTION: Overview / Dashboard
+            ═══════════════════════════════════════ -->
+            <div id="section-dashboard">
+
+                <!-- Quick ID Verification Queue -->
+                <div class="admin-section">
+                    <div class="admin-section-header">
+                        <div>
+                            <h2>🪪 ID Verification Queue</h2>
+                            <p>Users who uploaded an ID — awaiting residency verification</p>
+                        </div>
+                        <button class="btn btn-primary btn-sm" onclick="showSection('idverif')">View All</button>
+                    </div>
+                    <div id="quickIdQueue">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Approval Log preview -->
+                <div class="admin-section">
+                    <div class="admin-section-header">
+                        <div>
+                            <h2>📋 Recent Actions</h2>
+                            <p>Last 5 approval or rejection actions</p>
+                        </div>
+                    </div>
+                    <div class="activity-list" id="recentLogList">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+            </div><!-- /#section-dashboard -->
+
+
+            <!-- ═══════════════════════════════════════
+                 SECTION: Job Seekers
+            ═══════════════════════════════════════ -->
+            <div id="section-seekers" style="display:none;">
+                <div class="admin-section">
+                    <div class="admin-section-header">
+                        <div>
+                            <h2>👷 Pending Job Seekers</h2>
+                            <p>Job seeker profiles pending residency verification</p>
+                        </div>
+                        <span class="badge badge-pending" id="seekerBadge">0 Pending</span>
+                    </div>
+                    <div class="admin-filter-bar">
+                        <input type="text" class="admin-search-input" id="seekerSearch" placeholder="Search by name or barangay…">
+                        <select class="admin-filter-select" id="seekerBarangayFilter">
+                            <option value="">All Barangays</option>
+                            <option>Cadulawan</option><option>Calajo-an</option>
+                            <option>Camp 7</option><option>Camp 8</option>
+                            <option>Cuanos</option><option>Guindaruhan</option>
+                            <option>Linao</option><option>Manduang</option>
+                            <option>Pakigne</option><option>Poblacion Ward I</option>
+                            <option>Poblacion Ward II</option><option>Poblacion Ward III</option>
+                            <option>Poblacion Ward IV</option><option>Tubod</option>
+                            <option>Tulay</option><option>Tunghaan</option>
+                            <option>Tungkil</option><option>Tungkop</option>
+                            <option>Vito</option>
+                        </select>
+                        <select class="admin-filter-select" id="seekerStatusFilter">
+                            <option value="pending">Pending</option>
+                            <option value="all">All</option>
+                            <option value="approved">Approved</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                    </div>
+                    <div class="approval-list" id="seekerApprovalList"><!-- JS --></div>
+                </div>
+            </div>
+
+
+            <!-- ═══════════════════════════════════════
+                 SECTION: Clients
+            ═══════════════════════════════════════ -->
+            <div id="section-clients" style="display:none;">
+                <div class="admin-section">
+                    <div class="admin-section-header">
+                        <div>
+                            <h2>🏢 Pending Clients</h2>
+                            <p>Client accounts pending business location verification</p>
+                        </div>
+                        <span class="badge badge-pending" id="clientBadge">0 Pending</span>
+                    </div>
+                    <div class="admin-filter-bar">
+                        <input type="text" class="admin-search-input" id="clientSearch" placeholder="Search by company name or barangay…">
+                        <select class="admin-filter-select" id="clientBarangayFilter">
+                            <option value="">All Barangays</option>
+                            <option>Cadulawan</option><option>Calajo-an</option>
+                            <option>Camp 7</option><option>Camp 8</option>
+                            <option>Cuanos</option><option>Guindaruhan</option>
+                            <option>Linao</option><option>Manduang</option>
+                            <option>Pakigne</option><option>Poblacion Ward I</option>
+                            <option>Poblacion Ward II</option><option>Poblacion Ward III</option>
+                            <option>Poblacion Ward IV</option><option>Tubod</option>
+                            <option>Tulay</option><option>Tunghaan</option>
+                            <option>Tungkil</option><option>Tungkop</option>
+                            <option>Vito</option>
+                        </select>
+                        <select class="admin-filter-select" id="clientStatusFilter">
+                            <option value="pending">Pending</option>
+                            <option value="all">All</option>
+                            <option value="approved">Approved</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                    </div>
+                    <div class="approval-list" id="clientApprovalList"><!-- JS --></div>
+                </div>
+            </div>
+
+
+            <!-- ═══════════════════════════════════════
+                 SECTION: ID Verification
+            ═══════════════════════════════════════ -->
+            <div id="section-idverif" style="display:none;">
+                <div class="admin-section">
+                    <div class="admin-section-header">
+                        <div>
+                            <h2>🪪 ID Verification Queue</h2>
+                            <p>All users who submitted an ID for Minglanilla residency verification</p>
+                        </div>
+                        <span class="badge badge-pending" id="idVerifBadge">0 Pending</span>
+                    </div>
+                    <div class="admin-filter-bar">
+                        <input type="text" class="admin-search-input" id="idVerifSearch" placeholder="Search by name or barangay…">
+                        <select class="admin-filter-select" id="idVerifTypeFilter">
+                            <option value="all">All Roles</option>
+                            <option value="jobseeker">Job Seekers</option>
+                            <option value="client">Clients</option>
+                        </select>
+                        <select class="admin-filter-select" id="idVerifStatusFilter">
+                            <option value="id_pending">ID Uploaded – Pending</option>
+                            <option value="all">All</option>
+                        </select>
+                    </div>
+                    <div class="approval-list" id="idVerifList"><!-- JS --></div>
+                </div>
+            </div>
+
+
+            <!-- ═══════════════════════════════════════
+                 SECTION: Job Listings (placeholder)
+            ═══════════════════════════════════════ -->
+            <div id="section-listings" style="display:none;">
+                <div class="admin-section">
+                    <div class="admin-section-header">
+                        <div><h2>💼 Job Listings Approval</h2><p>Review new job posts before they go live</p></div>
+                    </div>
+                    <div class="empty-admin-state">
+                        <span style="font-size:2.5rem;">📭</span>
+                        <p>No job listings pending review.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ═══════════════════════════════════════
+                 SECTION: Approval Log
+            ═══════════════════════════════════════ -->
+            <div id="section-log" style="display:none;">
+                <div class="admin-section">
+                    <div class="admin-section-header">
+                        <div><h2>📋 Full Approval Log</h2><p>Complete history of all approval and rejection actions</p></div>
+                        <button class="btn btn-secondary btn-sm" onclick="exportLog()">Export CSV</button>
+                    </div>
+                    <div class="activity-list" id="fullLogList"><!-- JS --></div>
+                </div>
+            </div>
+
+        </main>
+    </div><!-- /.admin-layout -->
+
+
+    <!-- ══════════════════════════════════════════════
+         ID REVIEW MODAL
+    ══════════════════════════════════════════════ -->
+    <div class="review-modal-overlay" id="reviewModal">
+        <div class="review-modal">
+
+            <div class="review-modal-header">
+                <h2 id="reviewModalTitle">Review Account</h2>
+                <button class="review-modal-close" onclick="closeReviewModal()">✕</button>
+            </div>
+
+            <div class="review-modal-body">
+
+                <!-- Left: user details -->
+                <div class="review-user-info">
+                    <div class="review-user-top">
+                        <div class="review-avatar" id="reviewAvatarEl">??</div>
+                        <div>
+                            <h3 id="reviewName">—</h3>
+                            <p id="reviewRole">—</p>
+                        </div>
+                    </div>
+
+                    <div class="review-detail-row">
+                        <span class="review-detail-label">Email</span>
+                        <span class="review-detail-value" id="reviewEmail">—</span>
+                    </div>
+                    <div class="review-detail-row">
+                        <span class="review-detail-label">Phone</span>
+                        <span class="review-detail-value" id="reviewPhone">—</span>
+                    </div>
+                    <div class="review-detail-row">
+                        <span class="review-detail-label">Barangay</span>
+                        <span class="review-detail-value" id="reviewBarangay">—</span>
+                    </div>
+                    <div class="review-detail-row">
+                        <span class="review-detail-label">Municipality</span>
+                        <span class="review-detail-value">Minglanilla, Cebu</span>
+                    </div>
+                    <div class="review-detail-row">
+                        <span class="review-detail-label">Submitted</span>
+                        <span class="review-detail-value" id="reviewSubmitted">—</span>
+                    </div>
+                    <div class="review-detail-row">
+                        <span class="review-detail-label">Current Status</span>
+                        <span class="review-detail-value" id="reviewCurrentStatus">—</span>
+                    </div>
+                </div>
+
+                <!-- Right: ID image -->
+                <div class="review-id-panel">
+                    <h4>Submitted ID / Document</h4>
+                    <div id="reviewIdContainer">
+                        <div class="review-id-placeholder">
+                            <span style="font-size:2rem;">🪪</span>
+                            <span>No ID uploaded yet</span>
+                        </div>
+                    </div>
+                    <span class="review-id-filename" id="reviewIdFilename"></span>
+                    <a id="reviewIdDownload" href="#" target="_blank"
+                        class="btn btn-ghost btn-sm" style="display:none;text-align:center;">
+                        🔗 Open Full Image
+                    </a>
+                </div>
+
+            </div><!-- /.review-modal-body -->
+
+            <div class="review-modal-footer">
+                <label class="review-footer-label" for="reviewReasonInput">
+                    Reason / Note (required for rejection, optional for approval):
+                </label>
+                <textarea class="review-reason-input" id="reviewReasonInput" rows="2"
+                    placeholder="e.g. ID clearly shows Minglanilla address. / ID address does not match barangay selected."></textarea>
+                <div class="review-footer-actions">
+                    <button class="btn btn-ghost btn-sm" onclick="closeReviewModal()">Cancel</button>
+                    <button class="btn btn-sm btn-reject" id="rejectBtn"
+                        onclick="submitVerdict('rejected')">✘ Reject</button>
+                    <button class="btn btn-sm btn-approve" id="approveBtn"
+                        onclick="submitVerdict('approved')">✔ Approve</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Scripts -->
+    <script type="module" src="../js/app.js"></script>
+    <script type="module" src="../js/admin-approvals.js"></script>
+    <script type="module">
+        import { logoutUser } from '../js/auth.js';
+        window.logout = async function () { await logoutUser(); };
+    </script>
+
+</body>
+</html>

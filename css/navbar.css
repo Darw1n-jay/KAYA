@@ -1,0 +1,84 @@
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    /* background: rgba(124, 135, 161, 0.85); */
+    background: #40577F;
+    backdrop-filter: blur(15px);
+
+    border-bottom: 1px solid var(--color-border);
+}
+
+.navbar-inner {
+    min-height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: white;
+}
+
+.logo span {
+    color: goldenrod;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.nav-links a {
+    color: white;
+    font-size: 0.95rem;
+    transition: var(--transition-fast);
+}
+
+.nav-links a:hover {
+    color: var(--color-text);
+}
+
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 14px;
+    color: #FFFFFF;
+}
+
+/* Logged-in user's name */
+#navbarAuth #navbarUserName {
+    display: inline-flex;
+    align-items: center;
+
+    color: #FFFFFF;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.2;
+
+    white-space: nowrap;
+}
+
+/* Responsive navbar */
+@media (max-width: 750px) {
+
+    .nav-links {
+        display: none;
+    }
+
+    .nav-actions .btn-secondary {
+        display: none;
+    }
+
+    #navbarAuth #navbarUserName {
+        font-size: 0.8rem;
+    }
+}

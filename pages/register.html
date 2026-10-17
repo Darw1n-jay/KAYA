@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | KAYA</title>
+    <link rel="icon" type="image/png" href="../assets/images/KAYA app.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="../css/profile.css">
+    <style>
+        /* Register-specific overrides */
+        .auth-page { align-items: flex-start; padding-top: 3rem; padding-bottom: 3rem; min-height: 100vh; }
+        .auth-card  { width: min(520px, 100%); }
+    </style>
+</head>
+
+<body>
+
+    <div class="auth-page">
+
+        <div class="auth-brand">
+            <a href="../index.html" class="logo">KA<span>YA</span></a>
+            <p>Where skills meet opportunity.</p>
+        </div>
+
+        <div class="auth-card">
+
+            <div class="auth-header">
+                <span class="auth-label">GET STARTED</span>
+                <h1>Create Account</h1>
+                <p>Join KAYA and connect with opportunities.</p>
+            </div>
+
+            <form id="registerForm">
+
+                <div class="form-group">
+                    <label for="fullName">Full Name *</label>
+                    <input type="text" id="fullName" name="fullName" class="form-input"
+                        placeholder="e.g. Juan Dela Cruz" autocomplete="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" class="form-input"
+                        placeholder="name@example.com" autocomplete="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password *</label>
+                    <input type="password" id="password" name="password" class="form-input"
+                        placeholder="At least 8 characters" autocomplete="new-password" minlength="8" required>
+                    <span class="field-hint">Minimum 8 characters. Use letters, numbers, and symbols.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password *</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" class="form-input"
+                        placeholder="Re-enter your password" autocomplete="new-password" minlength="8" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Account Type *</label>
+                    <div class="role-selection">
+                        <label class="role-option">
+                            <input type="radio" name="role" value="jobseeker" checked required>
+                            <div>
+                                <span>Job Seeker</span>
+                                <small>Find work and offer your skills</small>
+                            </div>
+                        </label>
+                        <label class="role-option">
+                            <input type="radio" name="role" value="client" required>
+                            <div>
+                                <span>Client / Employer</span>
+                                <small>Post jobs and hire talent</small>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- T&C checkbox — opens modal -->
+                <div class="form-group">
+                    <label class="tnc-checkbox-label" style="display:flex;align-items:flex-start;gap:0.6rem;cursor:pointer;font-size:0.85rem;color:var(--color-text-secondary);">
+                        <input type="checkbox" id="tncCheckbox" name="tnc" required
+                            style="width:16px;height:16px;accent-color:var(--color-primary);flex-shrink:0;margin-top:2px;">
+                        <span>
+                            I have read and agree to KAYA's
+                            <button type="button" id="openTncBtn"
+                                style="background:none;border:none;cursor:pointer;color:var(--color-primary-light);font-weight:600;font-size:inherit;text-decoration:underline;padding:0;">
+                                Terms &amp; Conditions and Privacy Policy
+                            </button>,
+                            including how my personal data will be collected and used.
+                        </span>
+                    </label>
+                </div>
+
+                <p id="registerMessage" role="status" aria-live="polite"
+                    style="font-size:0.875rem;color:var(--color-danger);min-height:1.2rem;"></p>
+
+                <button type="submit" id="registerButton" class="btn btn-primary btn-full">
+                    Create Account
+                </button>
+
+            </form>
+
+            <p class="auth-footer">
+                Already have an account? <a href="login.html">Log in</a>
+            </p>
+
+        </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════
+         TERMS & CONDITIONS + PRIVACY MODAL
+    ══════════════════════════════════════════════════ -->
+    <div class="tnc-modal-overlay" id="tncModal">
+        <div class="tnc-modal">
+
+            <div class="tnc-modal-header">
+                <h2>📜 Terms &amp; Conditions / Privacy Policy</h2>
+                <p>Please read carefully before creating your KAYA account.</p>
+            </div>
+
+            <div class="tnc-modal-body">
+
+                <!-- 1. Agreement -->
+                <div class="tnc-section">
+                    <h3>1. Agreement to Terms</h3>
+                    <p>
+                        By creating an account on KAYA, you agree to be bound by these Terms and Conditions
+                        and our Privacy Policy. If you do not agree, you may not use our platform.
+                        KAYA reserves the right to update these terms at any time, with notice sent to your
+                        registered email address.
+                    </p>
+                </div>
+
+                <!-- 2. Eligibility -->
+                <div class="tnc-section">
+                    <h3>2. Eligibility &amp; Residency Requirement</h3>
+                    <p>You must be at least <strong>18 years old</strong> to register on KAYA.
+                        By registering, you confirm that:</p>
+                    <ul>
+                        <li>You are at least 18 years of age.</li>
+                        <li>You will provide accurate, current, and complete information.</li>
+                        <li>You will maintain the security of your account credentials.</li>
+                        <li>You accept full responsibility for all activity under your account.</li>
+                    </ul>
+                    <div class="tnc-highlight-box" style="border-color:rgba(11,31,58,0.3);background:rgba(11,31,58,0.04);margin-top:0.75rem;">
+                        <p>
+                            📍 <strong>Minglanilla Residents Only.</strong> KAYA is an exclusive platform
+                            for residents and businesses of <strong>Minglanilla, Cebu</strong>.
+                            Registration is open only to individuals residing in one of the 19 official
+                            barangays of Minglanilla (Cadulawan, Calajo-an, Camp 7, Camp 8, Cuanos,
+                            Guindaruhan, Linao, Manduang, Pakigne, Poblacion Ward I–IV, Tubod, Tulay,
+                            Tunghaan, Tungkil, Tungkop, and Vito).
+                        </p>
+                        <p style="margin-top:0.5rem;">
+                            After registration, you will be required to upload a valid
+                            <strong>government-issued ID or Barangay Certificate</strong> confirming your
+                            Minglanilla address. Your account will remain <strong>pending</strong> until
+                            an KAYA admin reviews and approves your proof of residency.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 3. Personal Data We Collect -->
+                <div class="tnc-section">
+                    <h3>🔒 3. Personal Data We Collect</h3>
+                    <p>To provide our services, KAYA collects and stores the following information:</p>
+                    <div class="data-list">
+                        <div class="data-row">
+                            <span class="data-icon">👤</span>
+                            <div class="data-row-content">
+                                <strong>Identity Information</strong>
+                                <span>Full name, date of birth, gender, civil status, profile photo</span>
+                            </div>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-icon">📞</span>
+                            <div class="data-row-content">
+                                <strong>Contact Information</strong>
+                                <span>Email address, phone number, home address / location</span>
+                            </div>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-icon">💼</span>
+                            <div class="data-row-content">
+                                <strong>Professional Information</strong>
+                                <span>Skills, work experience, education, portfolio links, bio</span>
+                            </div>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-icon">🏢</span>
+                            <div class="data-row-content">
+                                <strong>Business Information (Clients)</strong>
+                                <span>Company name, industry, company size, website, job postings</span>
+                            </div>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-icon">📊</span>
+                            <div class="data-row-content">
+                                <strong>Usage Data</strong>
+                                <span>Pages visited, search queries, application history, session activity</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. How We Use Your Data -->
+                <div class="tnc-section">
+                    <h3>📋 4. How We Use Your Personal Data</h3>
+                    <ul>
+                        <li>To create and manage your KAYA account.</li>
+                        <li>To match job seekers with relevant job opportunities and clients.</li>
+                        <li>To display your profile to potential employers or clients.</li>
+                        <li>To send job alerts, platform updates, and service notifications.</li>
+                        <li>To improve platform performance, features, and user experience.</li>
+                        <li>To comply with applicable laws and prevent fraud or abuse.</li>
+                    </ul>
+                    <div class="tnc-highlight-box">
+                        <p>⚠️ <strong>Important:</strong> Your profile information — including your name, skills,
+                        and profile photo — will be <strong>visible to other platform users</strong>
+                        (clients or job seekers depending on your role). You control what information
+                        you choose to add to your profile.</p>
+                    </div>
+                </div>
+
+                <!-- 5. Data Sharing -->
+                <div class="tnc-section">
+                    <h3>5. Data Sharing &amp; Third Parties</h3>
+                    <p>KAYA does <strong>not</strong> sell your personal data to third parties.
+                        We may share data only in the following circumstances:</p>
+                    <ul>
+                        <li>With employers or clients you apply to or contact through KAYA.</li>
+                        <li>With service providers who help operate our platform (e.g., Supabase for database hosting).</li>
+                        <li>When required by law or to protect the rights and safety of users.</li>
+                    </ul>
+                </div>
+
+                <!-- 6. Data Retention & Deletion -->
+                <div class="tnc-section">
+                    <h3>6. Data Retention &amp; Your Rights</h3>
+                    <p>You have the right to:</p>
+                    <ul>
+                        <li><strong>Access</strong> — view all personal data we hold about you.</li>
+                        <li><strong>Correct</strong> — update inaccurate information via your profile.</li>
+                        <li><strong>Delete</strong> — request account deletion; we will remove your data within 30 days.</li>
+                        <li><strong>Withdraw consent</strong> — you may close your account at any time.</li>
+                    </ul>
+                    <p style="margin-top:0.5rem;">To exercise any of these rights, contact us at
+                        <strong>privacy@kaya.ph</strong>.</p>
+                </div>
+
+                <!-- 7. Platform Rules -->
+                <div class="tnc-section">
+                    <h3>7. Prohibited Conduct</h3>
+                    <ul>
+                        <li>Posting false, misleading, or fraudulent job listings or profiles.</li>
+                        <li>Harassing, threatening, or discriminating against other users.</li>
+                        <li>Scraping or copying platform data without written permission.</li>
+                        <li>Creating multiple accounts for deceptive purposes.</li>
+                        <li>Uploading content that violates any applicable law.</li>
+                    </ul>
+                    <p style="margin-top:0.5rem;">Violations may result in immediate account suspension or termination.</p>
+                </div>
+
+                <!-- 8. Cookies -->
+                <div class="tnc-section">
+                    <h3>8. Cookies &amp; Tracking</h3>
+                    <p>KAYA uses session cookies and local storage to maintain your login state
+                        and improve performance. We do not use third-party advertising trackers.</p>
+                </div>
+
+                <!-- 9. Contact -->
+                <div class="tnc-section">
+                    <h3>9. Contact Us</h3>
+                    <p>For questions about these terms or your data, contact:<br>
+                        📧 <strong>support@kaya.ph</strong><br>
+                        📍 Cebu City, Philippines</p>
+                </div>
+
+            </div>
+
+            <div class="tnc-modal-footer">
+                <label class="tnc-agree-row" for="tncModalCheck">
+                    <input type="checkbox" id="tncModalCheck">
+                    <span>I have read and understood the Terms &amp; Conditions and Privacy Policy,
+                        and I consent to the collection and use of my personal data as described above.</span>
+                </label>
+                <div class="tnc-footer-actions">
+                    <button type="button" class="btn btn-ghost btn-sm" id="tncDeclineBtn">Decline</button>
+                    <button type="button" class="btn btn-primary btn-sm" id="tncAcceptBtn" disabled>
+                        I Accept
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Shared website logic -->
+    <script type="module" src="../js/app.js"></script>
+
+    <!-- Registration logic -->
+    <script type="module">
+        import { registerUser } from '../js/auth.js';
+
+        /* ── T&C Modal logic ──────────────────────────────── */
+        const tncModal      = document.getElementById('tncModal');
+        const openTncBtn    = document.getElementById('openTncBtn');
+        const tncDeclineBtn = document.getElementById('tncDeclineBtn');
+        const tncAcceptBtn  = document.getElementById('tncAcceptBtn');
+        const tncModalCheck = document.getElementById('tncModalCheck');
+        const tncCheckbox   = document.getElementById('tncCheckbox');
+
+        // Open T&C modal
+        openTncBtn.addEventListener('click', () => {
+            tncModal.classList.add('open');
+        });
+
+        // Enable Accept button only when checkbox is ticked
+        tncModalCheck.addEventListener('change', () => {
+            tncAcceptBtn.disabled = !tncModalCheck.checked;
+        });
+
+        // Accept: tick the main checkbox, close modal
+        tncAcceptBtn.addEventListener('click', () => {
+            tncCheckbox.checked = true;
+            tncModal.classList.remove('open');
+        });
+
+        // Decline: untick main checkbox, close modal
+        tncDeclineBtn.addEventListener('click', () => {
+            tncCheckbox.checked = false;
+            tncModalCheck.checked = false;
+            tncAcceptBtn.disabled = true;
+            tncModal.classList.remove('open');
+        });
+
+        // Close on backdrop click
+        tncModal.addEventListener('click', (e) => {
+            if (e.target === tncModal) tncModal.classList.remove('open');
+        });
+
+        /* ── Registration form logic ──────────────────────── */
+        const registerForm    = document.getElementById('registerForm');
+        const registerButton  = document.getElementById('registerButton');
+        const registerMessage = document.getElementById('registerMessage');
+
+        registerForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            registerMessage.textContent = '';
+
+            if (!registerForm.checkValidity()) {
+                registerForm.reportValidity();
+                return;
+            }
+
+            const fullName = registerForm.elements['fullName'].value.trim();
+            const email    = registerForm.elements['email'].value.trim();
+            const password = registerForm.elements['password'].value;
+            const confirm  = registerForm.elements['confirmPassword'].value;
+            const role     = registerForm.elements['role'].value;
+
+            if (!fullName) {
+                registerMessage.textContent = 'Please enter your full name.';
+                return;
+            }
+
+            if (password !== confirm) {
+                registerMessage.textContent = 'Passwords do not match.';
+                return;
+            }
+
+            if (password.length < 8) {
+                registerMessage.textContent = 'Password must be at least 8 characters.';
+                return;
+            }
+
+            if (!tncCheckbox.checked) {
+                registerMessage.textContent = 'You must accept the Terms & Conditions to continue.';
+                // Auto-open the T&C modal
+                tncModal.classList.add('open');
+                return;
+            }
+
+            registerButton.disabled = true;
+            registerButton.textContent = 'Creating Account…';
+
+            try {
+                await registerUser({ fullName, email, password, role });
+            } finally {
+                registerButton.disabled = false;
+                registerButton.textContent = 'Create Account';
+            }
+        });
+    </script>
+
+</body>
+</html>

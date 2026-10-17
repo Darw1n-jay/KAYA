@@ -1,0 +1,77 @@
+/* ==============================
+   KAYA BRAND COLORS
+============================== */
+
+:root {
+
+    /* PRIMARY BRAND */
+
+    --color-primary: #0B1F3A;
+    --color-primary-dark: #071426;
+    --color-primary-light: #17365F;
+
+
+    /* GOLD ACCENT */
+
+    --color-gold: #D4A72C;
+    --color-gold-light: #E8C45A;
+    --color-gold-dark: #A67C18;
+
+
+    /* BACKGROUNDS */
+
+    --color-background: #F5F7FA;
+    --color-surface: #FFFFFF;
+    --color-surface-light: #EEF1F5;
+
+
+    /* BORDERS */
+
+    --color-border: #D9DEE7;
+
+
+    /* TEXT */
+
+    --color-text: #111827;
+    --color-text-secondary: #4B5563;
+    --color-text-muted: #6B7280;
+
+
+    /* STATUS */
+
+    --color-success: #16A34A;
+    --color-warning: #D4A72C;
+    --color-danger: #DC2626;
+
+
+    /* BASIC */
+
+    --color-white: #FFFFFF;
+    --color-black: #000000;
+
+
+    /* TYPOGRAPHY */
+
+    --font-primary: "Inter", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+
+
+    /* RADIUS */
+
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+
+
+    /* SHADOW */
+
+    --shadow-sm: 0 4px 15px rgba(11, 31, 58, 0.08);
+    --shadow-md: 0 10px 30px rgba(11, 31, 58, 0.12);
+
+
+    /* TRANSITIONS */
+
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+}
